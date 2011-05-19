@@ -1,11 +1,3 @@
-#---
-# Excerpted from "Agile Web Development with Rails, 4rd Ed.",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
-# Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
-#---
 class LineItemsController < ApplicationController
   # GET /line_items
   # GET /line_items.xml
@@ -50,12 +42,11 @@ class LineItemsController < ApplicationController
   def create
     @cart = current_cart
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(:product => product)
+    @line_item = @cart.add_product(product.id)
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to(@line_item.cart,
-          :notice => 'Line item was successfully created.') }
+        format.html { redirect_to(@line_item.cart) }
         format.xml  { render :xml => @line_item,
           :status => :created, :location => @line_item }
       else
@@ -86,10 +77,10 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1.xml
   def destroy
     @line_item = LineItem.find(params[:id])
-    @line_item.destroy
+	@line_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(line_items_url) }
+      format.html { redirect_to(current_cart, :notice => 'Item Removed') }
       format.xml  { head :ok }
     end
   end
