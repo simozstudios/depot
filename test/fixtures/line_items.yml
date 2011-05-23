@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  product_id: 1
-  cart_id: 1
+  product: ruby
+#START_HIGHLIGHT
+  order: one
+#END_HIGHLIGHT
 
 two:
-  product_id: 1
-  cart_id: 1
+  product: ruby
+  cart: one
