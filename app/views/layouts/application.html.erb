@@ -24,6 +24,14 @@
       <a href="http://www..../news">News</a><br />
       <a href="http://www..../contact">Contact</a><br />
 	  The time is: <%= Time.now %><br />
+	  
+	  <% if session[:user_id] %>
+	  <br />
+	  <%= link_to 'Orders', orders_path %>
+	  <%= link_to 'Products', products_path %>
+	  <%= link_to 'Users', users_path %>
+	  <%= button_to 'Logout', logout_path, :method => :delete  %>
+	  <% end %>
     </div>
     <div id="main">
       <%= yield %>
